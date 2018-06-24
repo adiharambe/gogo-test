@@ -26,8 +26,8 @@ char keys[ROWS][COLS] = {
   {'*','0','#'}
 };
 
-byte rowPins[ROWS] = { 9,8,7,6 };// Connect keypad ROW0, ROW1, ROW2 and ROW3 to these Arduino pins.
-byte colPins[COLS] = { 5,4,0 };// Connect keypad COL0, COL1 and COL2 to these Arduino pins.
+byte rowPins[ROWS] = { 9,8,7,6 };
+byte colPins[COLS] = { 5,4,0 };
 int led = 13;
 int relay = 11;
 
@@ -56,7 +56,7 @@ void checkAllPasswords(){
         Serial.print("Thank you for using our service");
         count = 1;
         count1 = 0;
-      }
+      }//cycle lock code and message
       else{
         myservo.write(90);
         Serial.print("Right!");
@@ -91,13 +91,14 @@ void appendAllPasswords(KeypadEvent eKey) {
 void loop(){
   
   keypad.getKey();
+  //auto locking timer initialized
   if(myservo.read() == 90){
     unsigned long currentTime = millis();
     if (count1 != 1){
       previousInterval = currentTime;
       count1 = 1;
     }
-  
+    //timeer is set to 15 seconds
     if (currentTime - previousInterval > 15000){
      myservo.write(0);
      Serial.print(currentTime);
