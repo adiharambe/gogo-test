@@ -62,6 +62,8 @@ void checkAllPasswords(){
           count = 1;
           count1 = 0;
           justLocked = true;
+          resetAllPasswords();
+          break;
         }
         if (passwordCheck[i] == 0 && i != MAXPASSWD - 1){
           myservo.write(90);
@@ -71,10 +73,10 @@ void checkAllPasswords(){
           count = 1;
           count1 = 1;
           justLocked = false;
+          resetAllPasswords();
+          break;
         }
     }
-      resetAllPasswords();
-      break;
   }
   
   if (count != 1){
